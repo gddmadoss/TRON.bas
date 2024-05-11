@@ -1,96 +1,96 @@
-CONST TRUE = 1
-CONST FALSE = 0
-SCREEN 0, 0, 0
-WIDTH 80, 25
-CALL DRAW_SCREEN
+Const TRUE = 1
+Const FALSE = 0
+Screen 0, 0, 0
+Width 80, 25
+Call DRAW_SCREEN
 number = 0: hit = 0
-start = TIMER + 0.25
+start = Timer + 0.25
 direction = 6
 row = 10
 column = 2
-char$ = CHR$(196)
+char$ = Chr$(196)
 hit = 0
 col = 9
-DO
-    A$ = INKEY$
-    A$ = RIGHT$(A$, 1)
-    IF pressed = 0 THEN IF A$ <> "" THEN pressed = 1
-    IF pressed = 1 THEN
+Do
+    A$ = InKey$
+    A$ = Right$(A$, 1)
+    If pressed = 0 Then If A$ <> "" Then pressed = 1
+    If pressed = 1 Then
         old = direction
         pressed = 2
-    END IF
+    End If
     '    LOCATE 19, 1: COLOR 11: PRINT A$
-    SELECT CASE A$
-        CASE "8": direction = 8
-        CASE "H": direction = 8
-        CASE "6": direction = 6
-        CASE "M": direction = 6
-        CASE "4": direction = 4
-        CASE "K": direction = 4
-        CASE "2": direction = 2
-        CASE "P": direction = 2
-    END SELECT
+    Select Case A$
+        Case "8": direction = 8
+        Case "H": direction = 8
+        Case "6": direction = 6
+        Case "M": direction = 6
+        Case "4": direction = 4
+        Case "K": direction = 4
+        Case "2": direction = 2
+        Case "P": direction = 2
+    End Select
     '    LOCATE 17, 1: COLOR 14: PRINT direction
     '   LOCATE 15, 1: COLOR 12: PRINT start
     '  LOCATE 16, 1: COLOR 13: PRINT TIMER
     ' LOCATE 18, 1: COLOR 12: PRINT DRAWING
-    IF start < TIMER THEN
-        start = TIMER + 0.15
+    If start < Timer Then
+        start = Timer + 0.15
         DRAWING = TRUE
-    END IF
-    IF DRAWING = TRUE THEN
+    End If
+    If DRAWING = TRUE Then
         pressed = 0
-        IF old = 2 AND direction = 2 THEN char$ = CHR$(179)
-        IF old = 2 AND direction = 4 THEN char$ = CHR$(217)
-        IF old = 2 AND direction = 6 THEN char$ = CHR$(192)
-        IF old = 4 AND direction = 4 THEN char$ = CHR$(196)
-        IF old = 4 AND direction = 2 THEN char$ = CHR$(218)
-        IF old = 4 AND direction = 8 THEN char$ = CHR$(192)
-        IF old = 6 AND direction = 6 THEN char$ = CHR$(196)
-        IF old = 6 AND direction = 8 THEN char$ = CHR$(217)
-        IF old = 6 AND direction = 2 THEN char$ = CHR$(191)
-        IF old = 8 AND direction = 8 THEN char$ = CHR$(179)
-        IF old = 8 AND direction = 6 THEN char$ = CHR$(218)
-        IF old = 8 AND direction = 4 THEN char$ = CHR$(191)
+        If old = 2 And direction = 2 Then char$ = Chr$(179)
+        If old = 2 And direction = 4 Then char$ = Chr$(217)
+        If old = 2 And direction = 6 Then char$ = Chr$(192)
+        If old = 4 And direction = 4 Then char$ = Chr$(196)
+        If old = 4 And direction = 2 Then char$ = Chr$(218)
+        If old = 4 And direction = 8 Then char$ = Chr$(192)
+        If old = 6 And direction = 6 Then char$ = Chr$(196)
+        If old = 6 And direction = 8 Then char$ = Chr$(217)
+        If old = 6 And direction = 2 Then char$ = Chr$(191)
+        If old = 8 And direction = 8 Then char$ = Chr$(179)
+        If old = 8 And direction = 6 Then char$ = Chr$(218)
+        If old = 8 And direction = 4 Then char$ = Chr$(191)
         DRAWING = FALSE
-        COLOR col
-        LOCATE row, column
-        PRINT char$
+        Color col
+        Locate row, column
+        Print char$
         old = direction
-        SELECT CASE direction
-            CASE 2: row = row + 1
-            CASE 4: column = column - 1
-            CASE 6: column = column + 1
-            CASE 8: row = row - 1
-        END SELECT
-        IF row = 0 THEN row = 22: hit = 1
-        IF row = 23 THEN row = 1: hit = 1
-        IF column = 0 THEN column = 80: hit = 1
-        IF column = 81 THEN column = 1: hit = 1
+        Select Case direction
+            Case 2: row = row + 1
+            Case 4: column = column - 1
+            Case 6: column = column + 1
+            Case 8: row = row - 1
+        End Select
+        If row = 0 Then row = 22: hit = 1
+        If row = 23 Then row = 1: hit = 1
+        If column = 0 Then column = 80: hit = 1
+        If column = 81 Then column = 1: hit = 1
         ' LOCATE 23, 1: COLOR 5: PRINT SCREEN(row, column)
-        seeing = SCREEN(row, column)
-        IF seeing <> 32 THEN hit = 1
-        IF hit = 1 THEN
+        seeing = Screen(row, column)
+        If seeing <> 32 Then hit = 1
+        If hit = 1 Then
             col = col + 1
             hit = 0
-        END IF
-        IF col = 16 THEN col = 1
-    END IF
-LOOP UNTIL hit = 1 OR A$ = CHR$(27)
+        End If
+        If col = 16 Then col = 1
+    End If
+Loop Until hit = 1 Or A$ = Chr$(27)
 
-SUB DRAW_SCREEN
-COLOR 0, 0
-CLS
-COLOR 15, 1
-FOR lll = 1 TO 23
-    IF lll = 1 THEN
-        PRINT CHR$(201); STRING$(78, 205); CHR$(187)
-    ELSEIF lll = 23 THEN
-        PRINT CHR$(200); STRING$(78, 205); CHR$(188)
-    ELSE
-        LOCATE lll, 1: PRINT CHR$(186)
-        LOCATE lll, 80: PRINT CHR$(186)
-    END IF
-NEXT lll
-COLOR 0, 0
-END SUB
+Sub DRAW_SCREEN
+    Color 0, 0
+    Cls
+    Color 15, 1
+    For lll = 1 To 23
+        If lll = 1 Then
+            Print Chr$(201); String$(78, 205); Chr$(187)
+        ElseIf lll = 23 Then
+            Print Chr$(200); String$(78, 205); Chr$(188)
+        Else
+            Locate lll, 1: Print Chr$(186)
+            Locate lll, 80: Print Chr$(186)
+        End If
+    Next lll
+    Color 0, 0
+End Sub
